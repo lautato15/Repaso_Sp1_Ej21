@@ -1,4 +1,26 @@
-function durationForHumans(num) {}
+function durationForHumans(TotalSegundos) {
+  const segundos = TotalSegundos % 60;
+  const minutos = Math.floor((TotalSegundos / 60) % 60);
+  const horas = Math.floor((TotalSegundos / 60 / 60) % 24);
+  const dias = Math.floor((TotalSegundos / 60 / 60 / 24) % 365);
+  const años = Math.floor(TotalSegundos / 60 / 60 / 24 / 365);
+
+  let resultado = [];
+  const calculos = [años, dias, horas, minutos, segundos];
+  const etiquetas = ["año", "dia", "hora", "minuto", "segundo"];
+  for (i = 0; i < 5; i++) {
+    resultado.push(
+      calculos[i] + " " + etiquetas[i] + (calculos[i] > 1 ? "s" : "")
+    );
+  }
+  //   Este metodo se utiliza para transformar a String el Array y que la ultima coma se transofrme en un "y"
+  const formatter = new Intl.ListFormat("es", {
+    style: "long",
+    type: "conjunction",
+  });
+
+  return formatter.format(resultado);
+}
 
 // Ejercicio 21
 // Crear una función llamada durationForHumans (Duración Para Humanos) que
